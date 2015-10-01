@@ -91,6 +91,10 @@ public class WordBreakSolrSpellChecker extends SolrSpellChecker {
    * See {@link WordBreakSpellChecker#setMinSuggestionFrequency}
    */
   public static final String PARAM_MIN_SUGGESTION_FREQUENCY = "minSuggestionFreq";
+  /**
+   * See {@link WordBreakSpellChecker#setIsWordRequiredOnBothSidesOfBreak(boolean)}
+   */
+  public static final String PARAM_IS_WORD_REQUIRED_ON_BOTH_SIDES_OF_BREAK = "isWordRequiredOnBothSidesOfBreak";
   
   /**
    * <p>
@@ -159,6 +163,11 @@ public class WordBreakSolrSpellChecker extends SolrSpellChecker {
     if (msf > 0) {
       wbsp.setMinSuggestionFrequency(msf);
     }
+    boolean br = boolParam(config, PARAM_IS_WORD_REQUIRED_ON_BOTH_SIDES_OF_BREAK);
+    //default to false if not populated, instead of true.
+    String strParam = strParam(config, PARAM_IS_WORD_REQUIRED_ON_BOTH_SIDES_OF_BREAK);
+    if (strParam != null)
+      wbsp.setIsWordRequiredOnBothSidesOfBreak(br);
     return name;
   }
   
